@@ -2,6 +2,7 @@
  * Created by Iaroslav Zhbankov on 07.11.2016.
  */
 var input = document.querySelector(".main-input");
+var eq = document.querySelector(".minor-input");
 var ident = {
     ac: ['[data-name="ac"]', 'ac'],
     ce: ['[data-name="ce"]', 'ce'],
@@ -25,15 +26,34 @@ var ident = {
 };
 function setInput(operator) {
     var inputValue = input.innerText;
-    if ((operator == "ac") || (operator == "ce")) {
+    if (operator == "ac") {
         input.innerText = '0';
+        eq.innerText = '0';
+    } else if (operator == "ce") {
+        input.innerText = '0';
+    } else if (operator == "equal") {
+        eq.innerText = calculation(input.innerText);
     } else {
         for (var key in ident) {
             if (operator == key) {
-                input.innerText += ident[key][1];
+                if ((operator == 'zero') && (input.innerText.indexOf('0') === 0)) {
+                    input.innerText += '';
+                }
+                if ((operator == 'dot') && (input.innerText.indexOf('.') != -1)) {
+                    input.innerText += '';
+                } else {
+                    input.innerText += ident[key][1];
+                    if ((input.innerText.indexOf('0') == 0) && (input.innerText.indexOf('.') != 1)) {
+                        input.innerText = input.innerText.slice(1);
+                    }
+                }
             }
         }
     }
+}
+
+function calculation(equation) {
+    return eval(equation);
 }
 
 var elements = Array.prototype.slice.call(document.querySelectorAll("button"));
