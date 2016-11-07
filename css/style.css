@@ -1,0 +1,31 @@
+body{
+background-color: #b4b4b4;
+}
+.calculator{
+    background-color: white;
+    margin-top: 10%;
+    width: 350px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 10px;
+}
+.title{
+    text-align: center;
+    font-size: large;
+}
+.input{
+    background-color: lightgray;
+    border-radius: 5px;
+    margin:5px;
+    text-align: right;
+}
+.main-input{
+    font-size: xx-large;
+}
+.minor-input{
+    font-size: medium;
+}
+.custom{
+    margin-top: 5px;
+    width:100%;
+}
