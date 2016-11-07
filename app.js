@@ -33,6 +33,7 @@ function setInput(operator) {
         input.innerText = '0';
     } else if (operator == "equal") {
         eq.innerText = calculation(input.innerText);
+        input.innerText = '0';
     } else {
         for (var key in ident) {
             if (operator == key) {
