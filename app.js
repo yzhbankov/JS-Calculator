@@ -32,12 +32,19 @@ function setInput(operator) {
     } else if (operator == "ce") {
         input.innerText = '0';
     } else if (operator == "equal") {
+        var lastChar = input.innerText.slice(input.innerText.length - 1, input.innerText.length);
+    if ((input.innerText.length > 1)&&((lastChar == '+')||(lastChar == '-')||(lastChar == '/')||(lastChar == '*'))){
+        input.innerText = input.innerText + eq.innerText;
+        } else if (input.innerText.length == 1){
+        input.innerText = '0' + input.innerText;
+        input.innerText = input.innerText + eq.innerText;
+    }
         eq.innerText = calculation(input.innerText);
         input.innerText = '0';
     } else {
         for (var key in ident) {
             if (operator == key) {
-                if ((operator == 'zero') && (input.innerText.indexOf('0') === 0)) {
+                if ((operator == 'zero') && (input.innerText.indexOf('.') == -1)) {
                     input.innerText += '';
                 } else if ((operator == 'dot') && (input.innerText.indexOf('.') != -1)) {
                     input.innerText += '';
@@ -76,8 +83,7 @@ function setInput(operator) {
                         input.innerText.lastIndexOf('/') == input.innerText.length - 1)
                     )) {
                     input.innerText = input.innerText.slice(0, input.innerText.length - 1) + ident[key][1];
-                }
-                else {
+                }  else {
                     input.innerText += ident[key][1];
                     if ((input.innerText.indexOf('0') == 0) && (input.innerText.indexOf('.') != 1)) {
                         input.innerText = input.innerText.slice(1);
