@@ -21,7 +21,7 @@ var ident = {
     plus: ['[data-name="plus"]', '+'],
     minus: ['[data-name="minus"]', '-'],
     equal: ['[data-name="equal"]', '='],
-    plusminus: ['[data-name="plusminus"]', '+/-'],
+    backspace: ['[data-name="backspace"]', 'back'],
     dot: ['[data-name="dot"]', '.']
 };
 function setInput(operator) {
@@ -39,10 +39,45 @@ function setInput(operator) {
             if (operator == key) {
                 if ((operator == 'zero') && (input.innerText.indexOf('0') === 0)) {
                     input.innerText += '';
-                }
-                if ((operator == 'dot') && (input.innerText.indexOf('.') != -1)) {
+                } else if ((operator == 'dot') && (input.innerText.indexOf('.') != -1)) {
                     input.innerText += '';
-                } else {
+                } else if (operator == 'backspace') {
+                    if (input.innerText.indexOf('0') != 0) {
+                        input.innerText = input.innerText.slice(0, input.innerText.length - 1);
+                    }
+                    if (input.innerText.length < 1) {
+                        input.innerText = '0';
+                    }
+                } else if ((operator == 'plus') && ((input.innerText.lastIndexOf('+') == input.innerText.length - 1) || (
+                        input.innerText.lastIndexOf('*') == input.innerText.length - 1) || (
+                        input.innerText.lastIndexOf('/') == input.innerText.length - 1) || (
+                        input.innerText.lastIndexOf('.') == input.innerText.length - 1) || (
+                        input.innerText.lastIndexOf('-') == input.innerText.length - 1)
+                    )) {
+                    input.innerText = input.innerText.slice(0, input.innerText.length - 1) + ident[key][1];
+                } else if ((operator == 'minus') && ((input.innerText.lastIndexOf('+') == input.innerText.length - 1) || (
+                        input.innerText.lastIndexOf('*') == input.innerText.length - 1) || (
+                        input.innerText.lastIndexOf('/') == input.innerText.length - 1) || (
+                        input.innerText.lastIndexOf('.') == input.innerText.length - 1) || (
+                        input.innerText.lastIndexOf('-') == input.innerText.length - 1)
+                    )) {
+                    input.innerText = input.innerText.slice(0, input.innerText.length - 1) + ident[key][1];
+                } else if ((operator == 'multiplication') && ((input.innerText.lastIndexOf('+') == input.innerText.length - 1) || (
+                        input.innerText.lastIndexOf('-') == input.innerText.length - 1) || (
+                        input.innerText.lastIndexOf('/') == input.innerText.length - 1) || (
+                        input.innerText.lastIndexOf('.') == input.innerText.length - 1) || (
+                        input.innerText.lastIndexOf('*') == input.innerText.length - 1)
+                    )) {
+                    input.innerText = input.innerText.slice(0, input.innerText.length - 1) + ident[key][1];
+                } else if ((operator == 'division') && ((input.innerText.lastIndexOf('+') == input.innerText.length - 1) || (
+                        input.innerText.lastIndexOf('*') == input.innerText.length - 1) || (
+                        input.innerText.lastIndexOf('-') == input.innerText.length - 1) || (
+                        input.innerText.lastIndexOf('.') == input.innerText.length - 1) || (
+                        input.innerText.lastIndexOf('/') == input.innerText.length - 1)
+                    )) {
+                    input.innerText = input.innerText.slice(0, input.innerText.length - 1) + ident[key][1];
+                }
+                else {
                     input.innerText += ident[key][1];
                     if ((input.innerText.indexOf('0') == 0) && (input.innerText.indexOf('.') != 1)) {
                         input.innerText = input.innerText.slice(1);
