@@ -17,6 +17,7 @@ background-color: #b4b4b4;
     background-color: lightgray;
     border-radius: 5px;
     margin:5px;
+    margin-bottom: 20px;
     text-align: right;
 }
 .main-input{
@@ -34,4 +35,43 @@ background-color: #b4b4b4;
     color: white;
     margin-top: 5px;
     font-size: x-small;
+}
+
+@media screen and (max-width: 740px) {
+    .title{
+        text-align: center;
+        font-size: xx-large;
+    }
+    .calculator{
+        background-color: white;
+        margin: 2%;
+        margin-bottom: 2px;
+        width: 96%;
+        height:95vh;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        padding-left: 5%;
+        border-radius: 0;
+    }
+    .main-input{
+        font-size: 50px;
+    }
+    .minor-input{
+        font-size: 30px;
+    }
+    .custom{
+        margin-top: 15px;
+        width:98%;
+        height: 70px;
+    }
+    .button{
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+    .footer{
+        text-align: center;
+        color: white;
+        margin-top: 0;
+        font-size: small;
+    }
 }
