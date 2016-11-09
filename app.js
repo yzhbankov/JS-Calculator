@@ -35,9 +35,10 @@ function setInput(operator) {
         var lastChar = input.innerText.slice(input.innerText.length - 1, input.innerText.length);
         if ((input.innerText.length > 1) && ((lastChar == '+') || (lastChar == '-') || (lastChar == '/') || (lastChar == '*'))) {
             input.innerText = input.innerText + eq.innerText;
-        } else if (input.innerText.length == 1) {
+        } else if ((input.innerText.length == 1)&&(typeof(Number(input.innerText)) != "number")) {
             input.innerText = '0' + input.innerText;
             input.innerText = input.innerText + eq.innerText;
+            input.innerText = overflow(input.innerText);
         }
         eq.innerText = calculation(input.innerText);
         input.innerText = '0';
@@ -62,6 +63,7 @@ function setInput(operator) {
                         input.innerText.lastIndexOf('-') == input.innerText.length - 1)
                     )) {
                     input.innerText = input.innerText.slice(0, input.innerText.length - 1) + ident[key][1];
+                    input.innerText = overflow(input.innerText);
                 } else if ((operator == 'minus') && ((input.innerText.lastIndexOf('+') == input.innerText.length - 1) || (
                         input.innerText.lastIndexOf('*') == input.innerText.length - 1) || (
                         input.innerText.lastIndexOf('/') == input.innerText.length - 1) || (
@@ -69,6 +71,7 @@ function setInput(operator) {
                         input.innerText.lastIndexOf('-') == input.innerText.length - 1)
                     )) {
                     input.innerText = input.innerText.slice(0, input.innerText.length - 1) + ident[key][1];
+                    input.innerText = overflow(input.innerText);
                 } else if ((operator == 'multiplication') && ((input.innerText.lastIndexOf('+') == input.innerText.length - 1) || (
                         input.innerText.lastIndexOf('-') == input.innerText.length - 1) || (
                         input.innerText.lastIndexOf('/') == input.innerText.length - 1) || (
@@ -76,6 +79,7 @@ function setInput(operator) {
                         input.innerText.lastIndexOf('*') == input.innerText.length - 1)
                     )) {
                     input.innerText = input.innerText.slice(0, input.innerText.length - 1) + ident[key][1];
+                    input.innerText = overflow(input.innerText);
                 } else if ((operator == 'division') && ((input.innerText.lastIndexOf('+') == input.innerText.length - 1) || (
                         input.innerText.lastIndexOf('*') == input.innerText.length - 1) || (
                         input.innerText.lastIndexOf('-') == input.innerText.length - 1) || (
@@ -83,10 +87,13 @@ function setInput(operator) {
                         input.innerText.lastIndexOf('/') == input.innerText.length - 1)
                     )) {
                     input.innerText = input.innerText.slice(0, input.innerText.length - 1) + ident[key][1];
+                    input.innerText = overflow(input.innerText);
                 } else if (((operator == 'plus') || (operator == 'minus') || (operator == 'multiplication') || (operator == 'division')) && (input.innerText == '0')) {
                     input.innerText = eq.innerText + ident[key][1];
+                    input.innerText = overflow(input.innerText);
                 } else {
                     input.innerText += ident[key][1];
+                    input.innerText = overflow(input.innerText);
                     if ((input.innerText.indexOf('0') == 0) && (input.innerText.indexOf('.') != 1)) {
                         input.innerText = input.innerText.slice(1);
                     }
@@ -97,7 +104,15 @@ function setInput(operator) {
 }
 
 function calculation(equation) {
+    var res = eval(equation);
+    console.log(res);
     return eval(equation);
+}
+function overflow(str){
+    if (str.length > 16){
+        str = str.slice(0,16);
+    }
+    return str;
 }
 
 var elements = Array.prototype.slice.call(document.querySelectorAll("button"));
